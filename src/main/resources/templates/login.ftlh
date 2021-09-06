@@ -1,13 +1,9 @@
 <#import "parts/common.ftlh" as c>
+<#import "parts/login.ftlh" as l>
 
 <@c.page>
     <a href="/">main</a>
     логин
-    <form action="/login" method="post">
-        <div><label> User Name : <input type="text" name="username"/> </label></div>
-        <div><label> Password: <input type="password" name="password"/> </label></div>
-        <input type="hidden" name="_csrf" value="{{_csrf.token}}">
-        <div><input type="submit" value="Sign In"/></div>
-    </form>
+    <@l.login "/login" />
     <a href="/registration">я лох и у меня нет аккаунта</a>
 </@c.page>
