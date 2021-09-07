@@ -8,13 +8,10 @@ public class Message {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
-    private String adress;
+    private String address;
     private String time;
     private String comment;
     private String status;
-
-    private String text;
-    private String tag;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
@@ -23,12 +20,15 @@ public class Message {
     public Message() {
     }
 
-    public Message(String text, String tag, User user) {
+    public Message(User user, String address, String time,String comment,String status) {
         this.author = user;
-        this.text = text;
-        this.tag = tag;
+        this.address = address;
+        this.time = time;
+        this.comment = comment;
+        this.status = status;
     }
 
+    public Long getUserId(){ return author.getId(); }
 
     public String getAuthorName() {
         return author != null ? author.getUsername() : "<none>";
@@ -42,14 +42,6 @@ public class Message {
         this.author = author;
     }
 
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getText() {
-        return text;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -58,11 +50,35 @@ public class Message {
         this.id = id;
     }
 
-    public String getTag() {
-        return tag;
+    public String getAddress() {
+        return address;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

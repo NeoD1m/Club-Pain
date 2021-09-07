@@ -13,10 +13,10 @@
                 <a class="nav-link" href="/">О нас</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/main">Записаться на игру</a>
+                <a class="nav-link" href="/trainers">Наши инструкторы</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/trainers">Наши инструкторы</a>
+                <a class="nav-link" href="/main">Записаться на игру</a>
             </li>
             <#if isAdmin>
             <li class="nav-item">

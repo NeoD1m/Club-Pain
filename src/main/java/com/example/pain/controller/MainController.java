@@ -33,11 +33,11 @@ public class MainController {
             Map<String,Object > model){
         Iterable<Message> messages = messageRepo.findAll();
 
-        if(filter != null && !filter.isEmpty()){
+        /*if(filter != null && !filter.isEmpty()){
             messages = messageRepo.findByTag(filter);
         }else{
             messages = messageRepo.findAll();
-        }
+        }*/
 
         model.put("messages",messages);
         model.put("filter",filter);
@@ -57,8 +57,12 @@ public class MainController {
     @PostMapping("/main")
     public String add(
             @AuthenticationPrincipal User user,
-            @RequestParam String text,@RequestParam String tag, Map<String,Object> model){ ///////
-        Message message = new Message(text,tag, user);
+            @RequestParam String address,
+            @RequestParam String time,
+            @RequestParam String comment,
+            @RequestParam(required = false, defaultValue = "idk") String status,
+            Map<String,Object> model){
+        Message message = new Message(user,address,time, comment,status);
         messageRepo.save(message);
 
         Iterable<Message> messages = messageRepo.findAll();
