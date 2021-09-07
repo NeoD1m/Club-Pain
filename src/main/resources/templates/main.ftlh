@@ -49,20 +49,23 @@
     <tbody>
     <#list messages as message>
         <#if message.authorName == name || isAdmin == true>
-                <#if message.status == "DECLINED"><tr class="table-danger">
-                <#elseif message.status == "ACCEPTED"><tr class="table-success">
-                <#elseif message.status == "NOT_REVIEWED"><tr class="table-Default"><#else><tr></#if>
+                <#if message.status == "DECLINED"><tr class="table-danger"></#if>
+                <#if message.status == "ACCEPTED"><tr class="table-success"></#if>
+                <#if message.status == "NOT_REVIEWED"><tr class="table-Default"></#if>
+
                 <th>${message.authorName}</th>
                 <th>${message.address}</th>
                 <th>${message.time}</th>
                 <th>${message.comment}</th>
                     <th>
                 <#if isAdmin && message.status == "NOT_REVIEWED">
-                    <button type="submit">да</button>
-                    <button type="submit">нет</button>
+                    <form action="/accept" method="post">
+                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                        <input type="hidden" name="message" value="${message}"></form>
+                        <input type="submit" name="yes" value="accept"></form>
                 </#if></th>
                 </tr>
-        </#if>
+            </#if>
     <#else>
         Нет заявок
     </#list>

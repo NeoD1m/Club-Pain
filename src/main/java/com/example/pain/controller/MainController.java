@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
         import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.Map;
 
@@ -71,12 +72,19 @@ public class MainController {
         model.put("messages",messages);
         return "main";
     }
-    @PostMapping("/main")
+
+    @PostMapping("/accept")
     public String review(
+            @RequestParam Message message,
+            Map<String,Object> model){
+        System.out.println("AAAAAAAAAAAAAAAAAA");
 
-    ){
-        return "main";
+        messageRepo.delete(message);
+        message.setStatus(Status.ACCEPTED);
+        messageRepo.save(message);
+        Iterable<Message> messages = messageRepo.findAll();
+        model.put("messages",messages);
+        return "/";
     }
-
 
 }
