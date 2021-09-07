@@ -11,7 +11,7 @@ public class Message {
     private String address;
     private String time;
     private String comment;
-    private String status;
+    private Status status;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
@@ -20,7 +20,7 @@ public class Message {
     public Message() {
     }
 
-    public Message(User user, String address, String time,String comment,String status) {
+    public Message(User user, String address, String time,String comment,Status status) {
         this.author = user;
         this.address = address;
         this.time = time;
@@ -74,11 +74,11 @@ public class Message {
         this.comment = comment;
     }
 
-    public String getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 }

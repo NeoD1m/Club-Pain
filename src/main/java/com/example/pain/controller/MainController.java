@@ -2,6 +2,7 @@ package com.example.pain.controller;
 
 import com.example.pain.domain.Message;
 import com.example.pain.domain.Role;
+import com.example.pain.domain.Status;
 import com.example.pain.domain.User;
 import com.example.pain.repos.MessageRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,8 +61,9 @@ public class MainController {
             @RequestParam String address,
             @RequestParam String time,
             @RequestParam String comment,
-            @RequestParam(required = false, defaultValue = "idk") String status,
+            @RequestParam(required = false) Status status,
             Map<String,Object> model){
+        if (status == null) status = Status.NOT_REVIEWED;
         Message message = new Message(user,address,time, comment,status);
         messageRepo.save(message);
 
@@ -69,7 +71,12 @@ public class MainController {
         model.put("messages",messages);
         return "main";
     }
+    @PostMapping("/main")
+    public String review(
 
+    ){
+        return "main";
+    }
 
 
 }
