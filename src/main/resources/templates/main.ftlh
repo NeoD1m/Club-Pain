@@ -1,13 +1,15 @@
 <#import "parts/common.ftlh" as c>
-<#import "parts/login.ftlh" as l>
+
 
 <@c.page>
-    <a href="/">main</a>
-    <@l.logout/>
-    ${kek!""}
+
     <div>
         <form method="post">
-            <input type="text" name="text" placeholder="пиши сообщение">
+            <select type="text" name="text">
+                <option>ул кукушкина</option>
+                <option>ул ПУТИНА</option>
+            </select>
+            <!--<input type="text" name="text" placeholder="пиши сообщение">-->
             <input type="text" name="tag" placeholder="пиши тэг">
             <input type="hidden" name="_csrf" value="${_csrf.token}">
             <button type="submit">готово</button>

@@ -2,8 +2,8 @@
 <#import "parts/login.ftlh" as l>
 
 <@c.page>
-    <a href="/">main</a>
-    логин
+    <div class="d-flex justify-content-center">Логин</div>
     <@l.login "/login" />
-    <a href="/registration">я лох и у меня нет аккаунта</a>
+    <div class="d-flex justify-content-center"><a href="/registration">я лох и у меня нет аккаунта</a></div>
+
 </@c.page>

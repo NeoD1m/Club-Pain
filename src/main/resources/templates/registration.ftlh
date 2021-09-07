@@ -2,9 +2,10 @@
 <#import "parts/login.ftlh" as l>
 
 <@c.page>
-    <a href="/">main</a>
-    регистрация
+    <center>
+    Регистрация
     ${message!""}
     <@l.login "/registration" />
     <a href="/login">у меня есть аккаунт</a>
+    </center>
 </@c.page>

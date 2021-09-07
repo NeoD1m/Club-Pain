@@ -29,7 +29,6 @@ public class MainController {
     @GetMapping("/main")
     public String main(
             @AuthenticationPrincipal User user,
-            @RequestParam(required = false, defaultValue = "") String kek,
             @RequestParam(required = false, defaultValue = "") String filter,
             Map<String,Object > model){
         Iterable<Message> messages = messageRepo.findAll();
@@ -40,12 +39,19 @@ public class MainController {
             messages = messageRepo.findAll();
         }
 
-        if (user.getRoles().contains(Role.ADMIN))
-        kek = "вы админ)";
         model.put("messages",messages);
         model.put("filter",filter);
-        model.put("kek",kek);
         return "main";
+    }
+
+    @GetMapping("/error")
+    public String error(){
+        return "main";
+    }
+
+    @GetMapping("/trainers")
+    public String trainers(){
+        return "trainers";
     }
 
     @PostMapping("/main")
@@ -59,5 +65,7 @@ public class MainController {
         model.put("messages",messages);
         return "main";
     }
+
+
 
 }

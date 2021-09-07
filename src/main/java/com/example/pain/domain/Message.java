@@ -8,6 +8,11 @@ public class Message {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer id;
 
+    private String adress;
+    private String time;
+    private String comment;
+    private String status;
+
     private String text;
     private String tag;
 
