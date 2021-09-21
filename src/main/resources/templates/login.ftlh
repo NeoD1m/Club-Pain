@@ -4,6 +4,5 @@
 <@c.page>
     <div class="d-flex justify-content-center">Логин</div>
     <@l.login "/login" />
-    <div class="d-flex justify-content-center"><a href="/registration">я лох и у меня нет аккаунта</a></div>
-
+    <div class="d-flex justify-content-center"><a href="/registration">у меня нет аккаунта</a></div>
 </@c.page>

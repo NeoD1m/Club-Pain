@@ -2,7 +2,7 @@
 <#import "login.ftlh" as l>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Клуб "Боль"</a>
+    <a class="navbar-brand" href="/">Пейнтбольный клуб "Pain"</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -13,14 +13,14 @@
                 <a class="nav-link" href="/">О нас</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/trainers">Наши инструкторы</a>
+                <a class="nav-link" href="/trainers">Наши инструктора</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/main">Записаться на игру</a>
             </li>
             <#if isAdmin>
             <li class="nav-item">
-                <a class="nav-link" href="/user">Контроль юзверей</a>
+                <a class="nav-link" href="/user">Контроль пользователей</a>
             </li>
             </#if>
         </ul>

@@ -11,8 +11,10 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
         import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.websocket.server.PathParam;
+import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Map;
 
@@ -32,15 +34,13 @@ public class MainController {
     public String main(
             @AuthenticationPrincipal User user,
             @RequestParam(required = false, defaultValue = "") String filter,
-            Map<String,Object > model){
+            Map<String,Object> model){
         Iterable<Message> messages = messageRepo.findAll();
-
         /*if(filter != null && !filter.isEmpty()){
             messages = messageRepo.findByTag(filter);
         }else{
             messages = messageRepo.findAll();
         }*/
-
         model.put("messages",messages);
         model.put("filter",filter);
         return "main";
@@ -56,35 +56,53 @@ public class MainController {
         return "trainers";
     }
 
+    @GetMapping("/secret")
+    public String secret(){ return "secret"; }
+
     @PostMapping("/main")
     public String add(
             @AuthenticationPrincipal User user,
             @RequestParam String address,
             @RequestParam String time,
             @RequestParam String comment,
-            @RequestParam(required = false) Status status,
-            Map<String,Object> model){
+            @RequestParam(required = false) Status status, Map<String, Object> model
+    ) {
         if (status == null) status = Status.NOT_REVIEWED;
         Message message = new Message(user,address,time, comment,status);
+
         messageRepo.save(message);
 
         Iterable<Message> messages = messageRepo.findAll();
-        model.put("messages",messages);
+
+        model.put("messages", messages);
         return "main";
     }
-
-    @PostMapping("/accept")
-    public String review(
-            @RequestParam Message message,
-            Map<String,Object> model){
-        System.out.println("AAAAAAAAAAAAAAAAAA");
-
-        messageRepo.delete(message);
-        message.setStatus(Status.ACCEPTED);
-        messageRepo.save(message);
+    @PostMapping(value="/main/accept")
+    public String accept(@RequestParam("message") String messageId,Map<String, Object> model){
         Iterable<Message> messages = messageRepo.findAll();
-        model.put("messages",messages);
-        return "/";
-    }
+        for (Message message : messages) {
+            if (message.getId().equals(Integer.parseInt(messageId))) {
+                messageRepo.delete(message);
+                message.setStatus(Status.ACCEPTED);
+                messageRepo.save(message);
+            }
+        }
 
+        model.put("messages", messages);
+        return "main";
+    }
+    @PostMapping(value="/main/decline")
+    public String decline(@RequestParam("message") String messageId,Map<String, Object> model){
+        Iterable<Message> messages = messageRepo.findAll();
+        for (Message message : messages) {
+            if (message.getId().equals(Integer.parseInt(messageId))) {
+                messageRepo.delete(message);
+                message.setStatus(Status.DECLINED);
+                messageRepo.save(message);
+            }
+        }
+
+        model.put("messages", messages);
+        return "main";
+    }
 }
