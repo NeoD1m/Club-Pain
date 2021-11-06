@@ -56,8 +56,6 @@ public class MainController {
         return "trainers";
     }
 
-    @GetMapping("/secret")
-    public String secret(){ return "secret"; }
 
     @PostMapping("/main")
     public String add(
